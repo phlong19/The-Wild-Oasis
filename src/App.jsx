@@ -19,11 +19,11 @@ function App() {
           <Route element={<AppLayout />}>
             <Route index element={<Navigate to="dashboard" />} />
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="booking" element={<Bookings />} />
-            <Route path="cabin" element={<Cabins />} />
-            <Route path="setting" element={<Settings />} />
+            <Route path="bookings" element={<Bookings />} />
+            <Route path="cabins" element={<Cabins />} />
+            <Route path="settings" element={<Settings />} />
             <Route path="account" element={<Account />} />
-            <Route path="user" element={<Users />} />
+            <Route path="users" element={<Users />} />
           </Route>
 
           <Route path="login" element={<Login />} />
