@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Bookings from "./pages/Bookings";
@@ -9,10 +10,23 @@ import Users from "./pages/Users";
 import PageNotFound from "./pages/PageNotFound";
 import GlobbalStyles from "./styles/GlobalStyles";
 import AppLayout from "./ui/AppLayout";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // staleTime: 60 * 1000, 1mins
+      staleTime: 0, //always keep data fetching to in sync
+    },
+  },
+});
 
 function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools />
       <GlobbalStyles />
       <BrowserRouter>
         <Routes>
@@ -30,7 +44,24 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
-    </>
+
+      <Toaster
+        position="top-right"
+        containerStyle={{ margin: "8px" }}
+        gutter={12}
+        toastOptions={{
+          success: { duration: 3500 },
+          error: { duration: 4000 },
+          style: {
+            fontSize: "16px",
+            maxWidth: "500px",
+            padding: "16px 24px",
+            backgroundColor: "var(--color-grey-0)",
+            color: "var(--color-grey-700)",
+          },
+        }}
+      />
+    </QueryClientProvider>
   );
 }
 
