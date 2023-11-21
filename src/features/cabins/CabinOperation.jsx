@@ -11,7 +11,7 @@ function CabinOperation() {
           { value: "no-discount", label: "No discount" },
           { value: "with-discount", label: "With discount" },
         ]}
-        filterName="discount"
+        filterField="discount"
       />
       <SortBy
         options={[
