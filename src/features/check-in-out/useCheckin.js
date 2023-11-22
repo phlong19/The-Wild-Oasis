@@ -8,10 +8,11 @@ export function useCheckin() {
   const navigate = useNavigate();
 
   const { isPending: isCheckingIn, mutate: checkin } = useMutation({
-    mutationFn: (bookingId) =>
+    mutationFn: ({ bookingId, breakfast }) =>
       updateBooking(bookingId, {
         status: "checked-in",
         isPaid: true,
+        ...breakfast,
       }),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ refetchType: "active" });
