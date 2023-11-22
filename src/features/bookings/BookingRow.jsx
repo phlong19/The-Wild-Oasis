@@ -7,7 +7,7 @@ import Menus from "../../ui/Menus";
 
 import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
-import { HiEye, HiPencil, HiTrash } from "react-icons/hi2";
+import { HiArrowDownOnSquare, HiEye, HiPencil, HiTrash } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 
 const Cabin = styled.div`
@@ -94,6 +94,15 @@ function BookingRow({
           >
             See details
           </Menus.Button>
+
+          {status === "unconfirmed" && (
+            <Menus.Button
+              icon={<HiArrowDownOnSquare />}
+              onClick={() => navigate(`/checkin/${bookingId}`)}
+            >
+              Checkin
+            </Menus.Button>
+          )}
 
           <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
 
