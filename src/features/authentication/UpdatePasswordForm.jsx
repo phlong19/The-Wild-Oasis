@@ -5,15 +5,25 @@ import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 
 import { useUpdateUser } from "./useUpdateUser";
+import { useLogout } from "./useLogout";
 
 function UpdatePasswordForm() {
   const { register, handleSubmit, formState, getValues, reset } = useForm();
   const { errors } = formState;
 
   const { updateUser, isUpdating } = useUpdateUser();
+  const { logout } = useLogout();
 
   function onSubmit({ password }) {
-    updateUser({ password }, { onSuccess: reset });
+    updateUser(
+      { password },
+      {
+        onSuccess: () => {
+          reset();
+          logout();
+        },
+      }
+    );
   }
 
   return (
