@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Logo from "./Logo";
 import MainNav from "./MainNav";
 import Uploader from "../data/Uploader";
+import { useUser } from "../features/authentication/useUser";
 
 const StyledSidebar = styled.aside`
   background-color: var(--color-grey-0);
@@ -13,13 +14,17 @@ const StyledSidebar = styled.aside`
   gap: 3.2rem;
 `;
 
+const adminEmail = import.meta.env.VITE_SECRET_EMAIL;
+
 function Sidebar() {
+  const { user } = useUser();
+
   return (
     <StyledSidebar>
       <Logo />
       <MainNav />
 
-      <Uploader />
+      {user?.email === adminEmail && <Uploader />}
     </StyledSidebar>
   );
 }
