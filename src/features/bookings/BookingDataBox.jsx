@@ -55,6 +55,11 @@ const Section = styled.section`
   padding: 3.2rem 4rem 1.2rem;
 `;
 
+const MailTo = styled.a`
+  color: var(--color-indigo-700);
+  text-decoration: underline;
+`;
+
 const Guest = styled.div`
   display: flex;
   align-items: center;
@@ -145,7 +150,7 @@ function BookingDataBox({ booking }) {
             {guestName} {numGuests > 1 ? `+ ${numGuests - 1} guests` : ""}
           </p>
           <span>&bull;</span>
-          <p>{email}</p>
+          <MailTo href={`mailto:${email}`}>{email}</MailTo>
           <span>&bull;</span>
           <p>National ID {nationalID}</p>
         </Guest>
