@@ -12,8 +12,6 @@ import {
 } from "recharts";
 import { useDarkMode } from "../../context/DarkModeContext";
 import { eachDayOfInterval, format, isSameDay, subDays } from "date-fns";
-import { useSearchParams } from "react-router-dom";
-import { getToday } from "../../utils/helpers";
 
 const StyledSalesChart = styled(DashboardBox)`
   grid-column: 1 / -1;
