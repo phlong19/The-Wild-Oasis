@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import DashboardBox from "./DashboardBox";
+import Heading from "../../ui/Heading";
 import {
   Area,
   AreaChart,
@@ -12,6 +13,7 @@ import {
 import { useDarkMode } from "../../context/DarkModeContext";
 import { eachDayOfInterval, format, isSameDay, subDays } from "date-fns";
 import { useSearchParams } from "react-router-dom";
+import { getToday } from "../../utils/helpers";
 
 const StyledSalesChart = styled(DashboardBox)`
   grid-column: 1 / -1;
@@ -26,9 +28,12 @@ const StyledSalesChart = styled(DashboardBox)`
 function SalesChart({ bookings, last }) {
   const { isDarkMode } = useDarkMode();
 
+  const start = subDays(new Date(), last);
+  const end = new Date();
+
   const allDays = eachDayOfInterval({
-    start: subDays(new Date(), last),
-    end: new Date(),
+    start,
+    end,
   });
 
   const data = allDays.map((date) => {
@@ -60,6 +65,9 @@ function SalesChart({ bookings, last }) {
 
   return (
     <StyledSalesChart>
+      <Heading as="h2">
+        Sales from {format(start, "MMMM dd")} - {format(end, "MMMM dd yyyy")}
+      </Heading>
       <ResponsiveContainer width="100%" height={300}>
         <AreaChart data={data}>
           <CartesianGrid strokeDasharray={4} />
@@ -85,7 +93,7 @@ function SalesChart({ bookings, last }) {
             stroke={colors.extrasSales.stroke}
             fill={colors.extrasSales.fill}
             strokeWidth={2}
-            name="Extras     sales"
+            name="Extras sales"
             unit="$"
           />
         </AreaChart>
